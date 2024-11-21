@@ -1,0 +1,2 @@
+Para simplificar o desenvolvimento, aproveitei a lógica do meu projeto PAP, que já possui um sistema de login bem estruturado.
+ 

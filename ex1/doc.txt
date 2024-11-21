@@ -1,0 +1,4 @@
+Ao fazer o exercicio utilizei a estrutura de tabelas (com as tags <table>, <tr>, <td>, <tbody>, etc.) para representar os "customers", mas assim não havia uma individualização para cada cliente. 
+Sendo assim utilizei <div>, para representa-los distintamente com espaçamento vertical entre eles e efeito hover.
+
+Usei também um loop para não repetir várias vezes para incluir os customers

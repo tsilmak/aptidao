@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../styles/output.css" rel="stylesheet" />
+    <title>Ex 1</title>
+  </head>
+  <body>
+    <div class="mb-4 flex">
+      <h1 class="text-xl font-bold text-gray-800">Customer List</h1>
+      <button
+        type="button"
+        class="flex items-center rounded-3xl text-white bg-indigo-500 font-medium text-sm px-4 py-2 mb-2 ml-auto"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5 mr-2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+        Add Customer
+      </button>
+    </div>
+
+    <div class="w-full">
+      <!-- Header Row -->
+      <div
+        class="grid grid-cols-6 uppercase text-sm text-gray-500 pb-4 font-bold"
+      >
+        <div class="col-span-2">
+          <input class="mx-3" id="header-checkbox" type="checkbox" />
+          <span>Basic Info</span>
+        </div>
+        <div>Company Name</div>
+        <div>Phone Number</div>
+        <div>Status</div>
+        <div>Created Date</div>
+      </div>
+
+      <!-- Customer Rows Container -->
+      <div class="space-y-3" id="customer-table-body">
+        <!-- JavaScript will insert rows here -->
+      </div>
+    </div>
+
+    <script>
+      const customers = [
+        {
+          id: 1,
+          name: "John Doe",
+          email: "john.doe@gmail.com",
+          company: "Hartmann Group",
+          phone: "+68 574 01 68",
+          active: true,
+          createdDate: "16 Oct 2023",
+          avatar:
+            "https://images.generated.photos/hduC_c_9RYIUAnQvFf6wh91HGwQ9ch3IceyinaIQcnY/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/MTc0NzA1LmpwZw.jpg",
+        },
+        {
+          id: 2,
+          name: "GR&R",
+          email: "gr&r@gmail.com",
+          company: "Gaylord, Reichel and Rosennnnnnnnnn",
+          phone: "+81 906 68 07",
+          active: true,
+          createdDate: "22 Oct 2023",
+          avatar: "https://randomuser.me/api/portraits/men/9.jpg",
+        },
+        {
+          id: 3,
+          name: "Bergnaum Group",
+          email: "bregnaum@gmail.com",
+          company: "Bergnaum Group",
+          phone: "+22 288 04 91",
+          active: true,
+          createdDate: "23 Oct 2023",
+          avatar: "https://randomuser.me/api/portraits/lego/8.jpg",
+        },
+        {
+          id: 4,
+          name: "D'Amore PLC",
+          email: "d'amore@gmail.com",
+          company: "D'Amore PLC",
+          phone: "+66 372 55 58",
+          active: false,
+          createdDate: "2 Nov 2023",
+          avatar: "https://randomuser.me/api/portraits/women/47.jpg",
+        },
+        {
+          id: 5,
+          name: "Eric Dyer",
+          email: "eric.dyer@gmail.com",
+          company: "Hammes Ltd",
+          phone: "+87 518 23 93",
+          active: true,
+          createdDate: "10 Nov 2023",
+          avatar: "https://randomuser.me/api/portraits/lego/5.jpg",
+        },
+        {
+          id: 6,
+          name: "HR&L",
+          email: "hr&l@gmail.com",
+          company: "Hermann, Rutherford and Lllllllllll",
+          phone: "+90 545 13 52",
+          active: true,
+          createdDate: "4 Dec 2023",
+          avatar:
+            "https://i.redd.it/i-made-h-into-each-default-google-pfp-color-v0-2e73pdw823md1.png?width=1000&format=png&auto=webp&s=8dc9923eb30b490158273fa0dec338a220a75509",
+        },
+        {
+          id: 7,
+          name: "Auer-O'Kon",
+          email: "auer.kon@gmail.com",
+          company: "Auer-O'Kon",
+          phone: "+46 146 83 44",
+          active: false,
+          createdDate: "13 Dec 2023",
+          avatar: "https://randomuser.me/api/portraits/lego/6.jpg",
+        },
+        {
+          id: 8,
+          name: "Mosciski-Denesik",
+          email: "mosc.den@gmail.com",
+          company: "Mosciski-Denesik",
+          phone: "+53 532 55 82",
+          active: true,
+          createdDate: "6 Jan 2023",
+          avatar: "https://randomuser.me/api/portraits/women/48.jpg",
+        },
+      ];
+      function createCustomerRow(customer) {
+        const row = document.createElement("div");
+        row.classList.add(
+          "grid",
+          "grid-cols-6",
+          "items-center",
+          "bg-white",
+          "rounded-xl",
+          "hover:bg-violet-300",
+          "transition-colors",
+          "duration-150",
+          "font-semibold"
+        );
+
+        const statusClass = customer.active
+          ? "text-green-800 bg-green-100"
+          : "text-red-800 bg-red-100";
+        const statusText = customer.active ? "Active" : "Inactive";
+
+        const truncatedCompany =
+          customer.company.length > 25
+            ? customer.company.substring(0, 25) + "..."
+            : customer.company;
+
+        row.innerHTML = `
+          <div class="col-span-2 flex items-center py-4">
+          <input class="mx-3" id="user-checkbox" type="checkbox" />
+            <img class="w-10 h-10 rounded-full" src="${customer.avatar}" alt="Rounded avatar" />
+            <div class="mx-2 text-lg">
+              <h1 class="text-sm font-semibold">${customer.name}</h1>
+              <p class="text-xs text-gray-500">${customer.email}</p>
+            </div>
+          </div>
+          <div class="text-sm">${truncatedCompany}</div>
+          <div class="text-sm">${customer.phone}</div>
+          <div class="text-sm">
+            <span class="px-4 py-2 text-xs font-medium ${statusClass} rounded-full">
+              ${statusText}
+            </span>
+          </div>
+          <div class="text-sm ">
+            <div class="flex justify-between items-center mr-4 w-full">
+              <span>${customer.createdDate}</span>
+              <button class="text-gray-600 mr-4 dropdown-button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                </svg>
+              </button>
+            </div>
+            <div class="absolute hidden bg-white rounded-lg shadow-lg mt-2 right-0 mr-24 text-sm dropdown-menu z-10">
+              <ul>
+                <li class="flex justify-start items-center my-1">
+                  <button class="flex justify-start items-center px-2 text-gray-700 hover:bg-gray-100 w-full py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3 h-3 mr-2">
+                      <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
+                    </svg>
+                    Edit Contact
+                  </button>
+                </li>
+                <li class="flex justify-start items-center my-1">
+                  <button class="flex justify-start items-center px-2 text-gray-700 hover:bg-gray-100 w-full py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3 h-3 mr-2">
+                      <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
+                    </svg>
+                    Remove
+                  </button>
+                </li>
+                <li class="flex justify-start items-center my-1">
+                  <button class="flex justify-start items-center px-2 text-gray-700 hover:bg-gray-100 w-full py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 mr-2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 8.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v8.25A2.25 2.25 0 0 0 6 16.5h2.25m8.25-8.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-7.5A2.25 2.25 0 0 1 8.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 0 0-2.25 2.25v6" />
+                    </svg>
+                    Duplicate
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        `;
+        return row;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const dropdownButtons = document.querySelectorAll(".dropdown-button");
+
+        dropdownButtons.forEach((button) => {
+          button.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const dropdownMenu = button.parentElement.nextElementSibling;
+            dropdownMenu.classList.toggle("hidden");
+
+            document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+              if (menu !== dropdownMenu) {
+                menu.classList.add("hidden");
+              }
+            });
+          });
+        });
+
+        document.addEventListener("click", () => {
+          document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+            menu.classList.add("hidden");
+          });
+        });
+      });
+
+      // Function to render all customer rows
+      function renderCustomerTable(customers) {
+        const tableBody = document.getElementById("customer-table-body");
+        customers.forEach((customer) => {
+          const row = createCustomerRow(customer);
+          tableBody.appendChild(row);
+        });
+      }
+
+      // Render the customer table on page load
+      renderCustomerTable(customers);
+    </script>
+  </body>
+</html>

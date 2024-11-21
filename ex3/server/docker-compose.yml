@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: bitnami/postgresql:latest
+    ports:
+      - "5438:5432"
+    environment:
+      - POSTGRES_USER=dockerex3
+      - POSTGRES_PASSWORD=dockerex3
+      - POSTGRES_DB=pollex3
+    volumes:
+      - polls_pg_data:/bitnami/postgresql
+
+volumes:
+  polls_pg_data:
